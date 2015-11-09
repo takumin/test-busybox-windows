@@ -5,7 +5,7 @@ compiler:
 
 install:
   - sudo apt-get -qq update
-  - sudo apt-get -qq install mingw-w64
+  - sudo apt-get -qq install binutils-mingw-w64 gcc-mingw-w64 g++-mingw-w64
 
 script:
   - cd ./src
