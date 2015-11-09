@@ -1,0 +1,13 @@
+language: cpp
+
+compiler:
+  - gcc
+
+install:
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install mingw-w64
+
+script:
+  - cd ./src
+  - make mingw32_defconfig
+  - make
