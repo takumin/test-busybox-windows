@@ -11,3 +11,4 @@ script:
   - cd ./src
   - make mingw32_defconfig
   - make
+  - ls -la
