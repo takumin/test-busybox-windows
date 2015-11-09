@@ -11,8 +11,9 @@ addons:
         - binutils-mingw-w64
         - gcc-mingw-w64
         - g++-mingw-w64
+        - mingw-w64-dev
 
 script:
   - cd ./src
-  - make mingw32_defconfig
-  - make
+  - make -j4 mingw32_defconfig
+  - make -j4
