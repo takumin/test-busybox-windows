@@ -1,4 +1,5 @@
-sudo: false
+sudo: required
+dist: trusty
 
 language: cpp
 
@@ -8,10 +9,7 @@ compiler:
 addons:
     apt:
       packages:
-        - binutils-mingw-w64
-        - gcc-mingw-w64
-        - g++-mingw-w64
-        - mingw-w64-dev
+        - mingw-w64
 
 script:
   - cd ./src
