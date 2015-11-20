@@ -9,9 +9,12 @@ addons:
   apt:
     packages:
     - mingw-w64
+    - wine
 
 script:
 - ./build.sh
+- wine busybox-win32.exe
+- wine64 busybox-win64.exe
 
 deploy:
   provider: releases
