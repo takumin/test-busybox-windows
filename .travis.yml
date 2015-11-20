@@ -8,9 +8,7 @@ compiler:
 addons:
   apt:
     packages:
-    - binutils-mingw-w64
-    - gcc-mingw-w64
-    - g++-mingw-w64
+    - mingw-w64
 
 script:
 - ./build.sh
