@@ -11,10 +11,8 @@ addons:
     - binutils-mingw-w64
     - gcc-mingw-w64
     - g++-mingw-w64
-    - mingw-w64-i686-dev
-    - mingw-w64-x86-64-dev
-    - wine1.6-i386
-    - wine1.6-amd64
+    - wine
+    - wine:i386
 
 script:
 - ./build.sh
