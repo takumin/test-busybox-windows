@@ -9,29 +9,11 @@ addons:
   apt:
     packages:
     - mingw-w64
-    - mingw-w64-dev
-    - mingw-w64-tools
-    - binutils-mingw-w64
-    - binutils-mingw-w64-i686
-    - binutils-mingw-w64-i686:i386
-    - binutils-mingw-w64-x86-64
-    - binutils-mingw-w64-x86-64:i386
-    - gcc-mingw-w64
-    - gcc-mingw-w64-i686
-    - gcc-mingw-w64-i686:i386
-    - gcc-mingw-w64-x86-64
-    - gcc-mingw-w64-x86-64:i386
-    - g++-mingw-w64
-    - g++-mingw-w64-i686
-    - g++-mingw-w64-i686:i386
-    - g++-mingw-w64-x86-64
-    - g++-mingw-w64-x86-64:i386
     - wine
-    - wine:i386
 
 script:
 - ./build.sh
-- wine busybox-win32.exe
+#- wine busybox-win32.exe
 - wine64 busybox-win64.exe
 
 deploy:
