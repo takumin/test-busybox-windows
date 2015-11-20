@@ -1,0 +1,7 @@
+build_mingw32/
+build_mingw64/
+*.exe
+MD5SUMS
+SHA1SUMS
+SHA256SUMS
+SHA512SUMS
