@@ -12,6 +12,13 @@ addons:
         - mingw-w64
 
 script:
-  - cd ./src
-  - make -j4 mingw32_defconfig
-  - make -j4
+  # MinGW 32bit build.
+  - mkdir build_mingw32
+  - cd build_mingw32
+  - make KBUILD_SRC=../src -f ../src/Makefile -j 4 mingw32_defconfig
+  - make -j 4
+  # MinGW 64bit build.
+  - mkdir build_mingw64
+  - cd build_mingw64
+  - make KBUILD_SRC=../src -f ../src/Makefile -j 4 mingw64_defconfig
+  - make -j 4
