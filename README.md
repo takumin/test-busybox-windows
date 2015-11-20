@@ -8,6 +8,10 @@ Ubuntu 14.04(LTS) or later.
 apt-get install build-essential libncurses5-dev mingw-w64
 ```
 
+```bash
+git submodule update --init
+```
+
 ## Test binary
 Test for wine.
 
