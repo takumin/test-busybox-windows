@@ -2,23 +2,49 @@ sudo: required
 dist: trusty
 
 language: cpp
-
 compiler:
-  - gcc
+- gcc
 
 addons:
-    apt:
-      packages:
-        - mingw-w64
+  apt:
+    packages:
+    - mingw-w64
 
 script:
-  # MinGW 32bit build.
-  - mkdir ${TRAVIS_BUILD_DIR}/build_mingw32
-  - cd ${TRAVIS_BUILD_DIR}/build_mingw32
-  - make KBUILD_SRC=${TRAVIS_BUILD_DIR}/src -f ../src/Makefile -j 4 mingw32_defconfig
-  - make -j 4
-  # MinGW 64bit build.
-  - mkdir ${TRAVIS_BUILD_DIR}/build_mingw64
-  - cd ${TRAVIS_BUILD_DIR}/build_mingw64
-  - make KBUILD_SRC=${TRAVIS_BUILD_DIR}/src -f ../src/Makefile -j 4 mingw64_defconfig
-  - make -j 4
+# MinGW 32bit
+- cd ${TRAVIS_BUILD_DIR}
+- mkdir build_mingw32
+- cd build_mingw32
+- make KBUILD_SRC=../src -f ../src/Makefile -j 4 mingw32_defconfig
+- make -j 4
+- cp busybox.exe ../busybox-win32.exe
+# MinGW 64bit
+- cd ${TRAVIS_BUILD_DIR}
+- mkdir build_mingw64
+- cd build_mingw64
+- make KBUILD_SRC=../src -f ../src/Makefile -j 4 mingw64_defconfig
+- make -j 4
+- cp busybox.exe ../busybox-win64.exe
+# Checksum
+- cd ${TRAVIS_BUILD_DIR}
+- md5sum *.exe > MD5SUMS
+- sha1sum *.exe > SHA1SUMS
+- sha256sum *.exe > SHA256SUMS
+- sha512sum *.exe > SHA512SUMS
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Bw7cjF4JMkbtr0VV+BZTv0/ryNdHeTloWbrCRef8mqTrbPSX5G6Jg4pLfUb1hBUymMCvHRyaUft5jU6lehX1AWXpQaKN0j+oy1RSwLIUYdAXlA4K4TEd//Y9Sl12uXPxCee293l+Y0WE5lCWCiKRb0vxnqXU6gqoRKFcGjHUl2ufjAlDi+WD2yl/8XU0dRSrdRN/qtyyn6reSG/38a/40+rXN3HQ56kR/hLQD4DUMdn4hvaubHu9nWjSGjpVhMahG6c2/7cNyOX1tqsytPLyIuBG88uWjgJZ75OjY3muhgV3cP7EQxp7LnBB9a26+jCpS7eflGM+fyFQIyTVKrWWVtWvJrETFqZoNHRInYf/ZKjBZ/ScRqaNTFUYwRsjzdCeV7nGC5oUvwuikxxG/Ng9oL3MySETt8Bxcnd8mzRT4ve+Aka8pheoYUhrUtUdrQzkAczNc9a4AnyKrYk2n+UaTFm41puhLdBADVlOHRMAJCjGcf0cyf7w66JnquJ46dTHJwh9McdaV8BCigwCraL59slwSuvLIU5FsU10npo13be7GnG/SWd2L+x28efQvay4KJuKK+KfVPxH8fWvGdrZ9h7RdMXwAlcUdRp+aOr77oLeRKOyt2gzur+mBP3WWeRHlQp9Y8i41QhVI9aLR2/lwsUXYPoe5NmCtmIb91ER7bI=
+  file:
+  - busybox-win32.exe
+  - busybox-win64.exe
+  - MD5SUMS
+  - SHA1SUMS
+  - SHA256SUMS
+  - SHA512SUMS
+  on:
+    repo: takumin/test-busybox-windows
+    tags: true
+    all_branches: true
+  skip_cleanup: true
